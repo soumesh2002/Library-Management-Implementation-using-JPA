@@ -1,6 +1,7 @@
 package com.library.main;
 
 import java.util.Date;
+import java.util.Scanner;
 
 import com.library.entity.Books;
 import com.library.entity.Transactions;
@@ -12,6 +13,7 @@ import jakarta.persistence.Persistence;
 
 public class MainProgram {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("libraryPU");
         EntityManager em = emf.createEntityManager();
 
