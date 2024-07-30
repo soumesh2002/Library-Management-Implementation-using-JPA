@@ -9,6 +9,7 @@ import com.library.entity.Users;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 
 public class Transaction {
     EntityManagerFactory emf;
@@ -68,9 +69,14 @@ public class Transaction {
                 return;
             }
 
-            book.setBook_availability(false);
-            em.merge(book);
+            book.setBook_availability(true);
+
+            Transactions tr = em.createQuery(
+                    "SELECT t from Transactions t where t.book_id = bookId AND t.return_date IS NULL",
+                    Transactions.class).setParameter("book_id", bookId).getSingleResult();
+
             newT2.setReturnDate(new Date());
+            em.merge(tr);
             em.getTransaction().commit();
             System.out.println(
                     "Book with bookID: " + book.getId() + " returned successfully on: " + newT2.getReturnDate());

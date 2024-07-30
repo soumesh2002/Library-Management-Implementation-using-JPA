@@ -62,6 +62,6 @@ public class Books {
     }
 
     public void setBook_availability(boolean book_availability) {
-        this.book_availability = book_availability;
+        this.book_availability = true;
     }
 }
